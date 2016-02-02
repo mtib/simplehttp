@@ -2,7 +2,6 @@ package simplehttp
 
 import (
 	"fmt"
-	_ "os"
 	"testing"
 )
 
