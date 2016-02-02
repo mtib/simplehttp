@@ -6,7 +6,7 @@ import (
 )
 
 func TestHTTP(t *testing.T) {
-	jsresp, err := GetResponeBody("http://httpbin.org/ip")
+	jsresp, err := GetResponseBody("http://httpbin.org/ip")
 	if err != nil {
 		fmt.Print(err)
 		t.FailNow()
