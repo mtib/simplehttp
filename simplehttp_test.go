@@ -40,3 +40,12 @@ func TestIdentity(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestJSONData(t *testing.T) {
+	ipstr, _ := GetExternalIP()
+	var response map[string]interface{}
+	GetJSONData(ipbinurl, &response)
+	if ipstr != response["origin"] {
+		t.FailNow()
+	}
+}

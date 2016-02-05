@@ -17,6 +17,10 @@ func (i Identity) String() string {
 	return fmt.Sprintf("%s (%s)", i.Hostname, i.ExternalIP)
 }
 
+const (
+	ipbinurl = "http://httpbin.org/ip"
+)
+
 // GetResponseBody return the resp.Body() string using GET
 func GetResponseBody(url string) ([]byte, error) {
 	resp, err := http.Get(url)
@@ -30,7 +34,7 @@ func GetResponseBody(url string) ([]byte, error) {
 
 // GetExternalIP returns the external ip4 or ip6 adress using httpbin.org
 func GetExternalIP() (string, error) {
-	ipjson, err := GetResponseBody("http://httpbin.org/ip")
+	ipjson, err := GetResponseBody(ipbinurl)
 	if err != nil {
 		return "127.0.0.1", err
 	}
@@ -49,4 +53,14 @@ func GetWhoAmI() (Identity, error) {
 	}
 	i, err := GetExternalIP()
 	return Identity{h, i}, err
+}
+
+// GetJSONData Unmarshals the Response body to the interface provided
+func GetJSONData(url string, v *map[string]interface{}) error {
+	bytes, err := GetResponseBody(url)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(bytes, v)
+	return err
 }
