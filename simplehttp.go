@@ -55,12 +55,12 @@ func GetWhoAmI() (Identity, error) {
 	return Identity{h, i}, err
 }
 
-// GetJSONData Unmarshals the Response body to the interface provided
-func GetJSONData(url string) (v map[string]interface{}, err error) {
+// GetJSONMap Unmarshals the Response body to the interface provided
+func GetJSONMap(url string) (v map[string]interface{}, err error) {
 	bytes, err := GetResponseBody(url)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(bytes, v)
+	err = json.Unmarshal(bytes, &v)
 	return
 }

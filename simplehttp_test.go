@@ -41,9 +41,10 @@ func TestIdentity(t *testing.T) {
 	}
 }
 
-func TestJSONData(t *testing.T) {
+func TestJSONMap(t *testing.T) {
 	ipstr, _ := GetExternalIP()
-	response, _ := GetJSONData(ipbinurl)
+	response, _ := GetJSONMap(ipbinurl)
+	fmt.Printf("External: %v\nJSONData: %v\n", ipstr, response)
 	if ipstr != response["origin"] {
 		t.FailNow()
 	}
